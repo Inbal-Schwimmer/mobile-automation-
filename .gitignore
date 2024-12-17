@@ -19,6 +19,7 @@ pip-delete-this-directory.txt
 *.env
 .idea/
 .vscode/
+.venv
 *.DS_Store
 
 # Test reports and logs
