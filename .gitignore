@@ -1,0 +1,69 @@
+# Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.cache
+
+# Virtual environment folder
+venv/
+.venv/
+bin/
+
+# Dependency files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment and IDE settings
+.env
+*.env
+.idea/
+.vscode/
+*.DS_Store
+
+# Test reports and logs
+reports/
+allure-results/
+allure-report/
+test-output/
+*.log
+
+# Pytest cache
+.cache/
+
+# Jupyter Notebook checkpoints (if applicable)
+.ipynb_checkpoints/
+
+# Temporary files and directories
+*.tmp
+*.swp
+*.bak
+*.backup
+*.orig
+
+# Compiled C extensions
+*.so
+
+# Git ignored file management
+.gitignore
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Wheel files
+*.whl
+
+# Docker files (if using Docker)
+*.dockerfile
+
+# System files
+Thumbs.db
+.DS_Store

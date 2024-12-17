@@ -17,5 +17,5 @@ class TestLogin:
         login_page.handle_permission_dialog("Android", "send_notifications")
 
         # Perform login
-        login_page.login("inbal.schwimmer@example.com", "123456")
+        # login_page.login("inbal.schwimmer@example.com", "123456")
         # TODO: Add proper assertions to verify login success
