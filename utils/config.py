@@ -10,11 +10,11 @@ CONFIG = {
     },
     "ios": {
         "platformName": "iOS",
-        "platformVersion": "14.0",
-        "deviceName": "iPhone Simulator",
+        "platformVersion": "18.1",
+        "deviceName": "iPhone15",
         "automationName": "XCUITest",
-        "app": "/path/to/your/app.ipa",
-        "udid": "your_device_udid",  # Modify with your device UDID
-        "bundleId": "com.remepy.iosapp"  # Modify with your iOS app's bundle ID
+        "app": "/Users/inbalschwimmershafir/Documents/GitHub/Runner.app",
+        "udid": "C2DDCBDE-36E6-4601-B81F-77FCCFDBAF2A",  # Modify with your device UDID
+        "bundleId": "com.remepy.devbct"  # Modify with your iOS app's bundle ID
     }
 }

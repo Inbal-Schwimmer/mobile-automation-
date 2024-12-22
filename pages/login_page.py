@@ -5,12 +5,16 @@ from appium.webdriver.common.appiumby import AppiumBy
 
 
 class LoginPage(BasePage):
-    LOGIN_BUTTON = ("id", "login_button")  # example need to update
+    LOGIN_BUTTON = (AppiumBy.ACCESSIBILITY_ID, "התחברות")  # example need to update
     USERNAME_FIELD = ("id", "username_field")  # example need to update
     PASSWORD_FIELD = ("id", "password_field")  # example need to update
     ANDROID_ALLOW_BTN = ("id", "com.android.permissioncontroller:id/permission_allow_button")
     ANDROID_ALLOW_RECORD_AUDIO_BTN = ("id", "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     IOS_ALLOW_BTN = (AppiumBy.ACCESSIBILITY_ID, "Allow")
+    ANDROID_BACK_BTN = (AppiumBy.XPATH, "// android.widget.Button")
+    NO_EMAIL_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "יש להזין כתובת מייל")
+    NO_PASSWORD_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "הסיסמה חייבת להכיל לפחות 6 תווים")
+    # LOGIN_BUTTON_LOCATOR = (by_value_key, 'login_button')
 
     def login(self, username: str, password: str):
         self.input_text(self.USERNAME_FIELD, username)
@@ -46,3 +50,18 @@ class LoginPage(BasePage):
 
         except Exception as e:
             print(f"Permission dialog handling failed for {platform} - {permission_type}: {e}")
+
+    def click_on_back_button(self, platform: str):
+        try:
+            if platform == "Android":
+                WebDriverWait(self.driver, 10).until(
+                    EC.element_to_be_clickable(self.ANDROID_BACK_BTN)).click()
+
+            elif platform == "iOS":
+                WebDriverWait(self.driver, 10).until(
+                    EC.element_to_be_clickable(self.ANDROID_BACK_BTN)).click()
+
+        except Exception as e:
+            print(f"Permission dialog handling failed for {platform} : {e}")
+
+
