@@ -11,9 +11,8 @@ class DriverFactory:
         if platform == "Android":
             options = UiAutomator2Options()
             options.platformName = "Android"
-            options.deviceName = "emulator-5554"
-            options.app = "/Users/inbalschwimmershafir/Documents/GitHub/app-base-debug.apk"  # APK path
-            # options.automationName = "UiAutomator2"  # Automation engine
+            options.deviceName = "emulator-5556"
+            options.app = "/Users/inbalschwimmershafir/Documents/GitHub/frontend/apps/users_app/build/app/outputs/flutter-apk/app-base-debug.apk"  # APK path
             options.automationName = "Flutter"
             options.appPackage = "com.remepy.devbct"
             options.appActivity = "com.remepy.remepy.MainActivity"

@@ -1,4 +1,9 @@
 Appium-Python-Client~=4.4.0
+Appium-Flutter-Finder ~= 0.7.0
 pytest~=8.3.2
 allure-pytest==2.13.5
 selenium~=4.26
+marshmallow~=3.0.0b2
+pages~=0.3
+utils~=1.0.2
+allure-python-commons~=2.13.5
