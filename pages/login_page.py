@@ -1,25 +1,45 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from appium.webdriver.common.appiumby import AppiumBy
+from appium_flutter_finder.flutter_finder import FlutterElement, FlutterFinder
 
 
 class LoginPage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+
     LOGIN_BUTTON = (AppiumBy.ACCESSIBILITY_ID, "התחברות")  # example need to update
-    USERNAME_FIELD = ("id", "username_field")  # example need to update
-    PASSWORD_FIELD = ("id", "password_field")  # example need to update
+    EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[@resource-id='email_tf']")
+    PASSWORD_TF = (AppiumBy.XPATH,"//android.widget.EditText[@resource-id='password_tf']")
     ANDROID_ALLOW_BTN = ("id", "com.android.permissioncontroller:id/permission_allow_button")
     ANDROID_ALLOW_RECORD_AUDIO_BTN = ("id", "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     IOS_ALLOW_BTN = (AppiumBy.ACCESSIBILITY_ID, "Allow")
     ANDROID_BACK_BTN = (AppiumBy.XPATH, "// android.widget.Button")
     NO_EMAIL_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "יש להזין כתובת מייל")
     NO_PASSWORD_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "הסיסמה חייבת להכיל לפחות 6 תווים")
-    # LOGIN_BUTTON_LOCATOR = (by_value_key, 'login_button')
+    NEW_EMAIL_TF = (AppiumBy.XPATH, "email_tf")
+    REG_EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[@hint='כתובת מייל']")
+    REG_PASSWORD_TF = (AppiumBy.XPATH, "//android.widget.EditText[@hint='סיסמה']")
+    # def enter_email(self,email_address:str):
+    #     self.input_text(self.EMAIL_TF,email_address)
 
-    def login(self, username: str, password: str):
-        self.input_text(self.USERNAME_FIELD, username)
-        self.input_text(self.PASSWORD_FIELD, password)
-        self.click(self.LOGIN_BUTTON)
+    def enter_password(self,password):
+        self.input_text(self.REG_PASSWORD_TF,password)
+
+    def enter_email(self,email):
+        self.input_text(self.REG_EMAIL_TF,email)
+
+    def print_element_in_screen(self):
+        elements = self.driver.find_elements(AppiumBy.XPATH, "//*")  # Select all elements
+        for element in elements:
+            print("Tag:", element.tag_name)
+            print("Content-desc:", element.get_attribute("content-desc"))
+            print("Resource-id:", element.get_attribute("resource-id"))
+            print("Text:", element.text)
+            print("---")
+
 
     def handle_permission_dialog(self, platform: str, permission_type: str):
         try:

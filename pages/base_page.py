@@ -1,5 +1,9 @@
 import time
-
+from appium import webdriver
+from appium.webdriver.common.appiumby import AppiumBy
+from marshmallow.utils import set_value
+from selenium.common import NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -7,11 +11,19 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def find_element(self, locator: tuple):
+    def find_element(self, locator):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(locator)
+        )
         return self.driver.find_element(*locator)
 
-    def click(self, locator: tuple):
-        self.find_element(locator).click()
+    def element_exist(self, locator):
+        try:
+            time.sleep(1)
+            self.driver.find_element(*locator)
+            return True
+        except NoSuchElementException:
+            return False
 
     def click2(self, locator):
         element = WebDriverWait(self.driver, 10).until(
@@ -20,8 +32,9 @@ class BasePage:
         # time.sleep(3)
         # self.driver.find_element(*locator).click()
 
-
-    def input_text(self, locator: tuple, text: str):
-        self.find_element(locator).send_keys(text)
+    def input_text(self, locator, text):
+        element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
+        element.click()
+        element.send_keys(text)
 
 
