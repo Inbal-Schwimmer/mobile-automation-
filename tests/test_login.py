@@ -1,20 +1,14 @@
 import json
 import os
-import time
 import allure
 import pytest
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
-from utils.config_reader import ConfigReader
 from typing import Dict, List
 
 
 def load_test_data() -> Dict[str, List[Dict[str, str]]]:
-    """
-    Helper function to load test data from the user_data.json file.
-    """
-    # Get the absolute path to the JSON file
-    base_dir = os.path.dirname(os.path.abspath(__file__))  # Path to this file
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     json_file_path = os.path.join(base_dir, "data", "user_data.json")
 
     with open(json_file_path) as file:
@@ -70,14 +64,23 @@ class TestLogin:
         error_exist = login_page.element_exist(login_page.NO_PASSWORD_ERROR_TEXT)
         assert error_exist == True
 
+    @pytest.mark.parametrize("data", [
+        pytest.param(
+            item,
+            id=f"Invalid email test: {item['email']}"
+        ) for item in load_test_data()["valid_credentials"]
+    ])
     @pytest.mark.usefixtures("post_test_cleanup")
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.description("Verify success login when entering the correct credentials")
     @allure.epic("Login Tests")
-    def test_success_login(self, setup_driver, platform):
+    def test_success_login(self, setup_driver, platform, data: Dict[str, str]):
         login_page = LoginPage(setup_driver)
         home_page = HomePage(setup_driver)
-        login_page.open_app_after_installation("esan@remepy.com", "123456", platform)
+        valid_email = data['email']
+        valid_password = data['password']
+
+        login_page.open_app_after_installation(valid_email, valid_password , platform)
 
         value = home_page.element_exist(home_page.START_DAY_ACTIVITY_BTN)
         assert value == True

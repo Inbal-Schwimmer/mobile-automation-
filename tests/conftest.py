@@ -1,8 +1,10 @@
+import json
 import os
 import allure
 import pytest
 from pages.login_page import LoginPage
 from utils.driver_factory import DriverFactory
+from typing import Dict, List
 
 
 # Capture screenshot on test failure
@@ -101,4 +103,5 @@ def post_test_cleanup(setup_driver, platform):
     elif platform == "iOS":
         setup_driver.remove_app("com.remepy.devbct")
         setup_driver.install_app("/Users/inbalschwimmershafir/Documents/GitHub/Runner.app")
+
 
