@@ -1,10 +1,10 @@
 {
     "valid_credentials": [
-        {"email": "automation@remepy.com", "password": "123456"}
+        {"email": "esan@remepy.com", "password": "123456"}
     ],
     "invalid_email": [
-        {"email": "InbalSh2hotmail.com", "password": "123456"},
-        {"email": "", "password": ""},
-        {"email": "automation@remepy.com", "password": "521122112"}
+        {"email": "esanremepy.com", "password": "123456"},
+        {"email": "esan@remepycom", "password": "123456"},
+        {"email": "@remepy.com", "password": "123456"}
     ]
 }

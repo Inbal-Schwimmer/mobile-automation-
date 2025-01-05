@@ -1,9 +1,7 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from appium.webdriver.common.appiumby import AppiumBy
-from appium_flutter_finder.flutter_finder import FlutterElement, FlutterFinder
 
 
 class LoginPage(BasePage):
@@ -18,13 +16,12 @@ class LoginPage(BasePage):
     IOS_ALLOW_BTN = (AppiumBy.ACCESSIBILITY_ID, "Allow")
     ANDROID_BACK_BTN = (AppiumBy.XPATH, "// android.widget.Button")
     NO_EMAIL_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "יש להזין כתובת מייל")
+    INVALID_EMAIL_TEXT = (AppiumBy.ACCESSIBILITY_ID, "כתובת מייל לא תקינה")
     NO_PASSWORD_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "הסיסמה חייבת להכיל לפחות 6 תווים")
     NEW_EMAIL_TF = (AppiumBy.XPATH, "email_tf")
     REG_EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint,'email_address')]")
     REG_PASSWORD_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint, 'password')]")
     EMAIL_TEXTFIELD_LOCATOR = (AppiumBy.ACCESSIBILITY_ID, "email_tf")
-    # def enter_email(self,email_address:str):
-    #     self.input_text(self.EMAIL_TF,email_address)
 
     def enter_password(self,password):
         self.input_text(self.REG_PASSWORD_TF,password)
@@ -95,5 +92,11 @@ class LoginPage(BasePage):
 
         except Exception as e:
             print(f"Permission dialog not found for {platform} - {e}. Continuing test.")
+
+    def login_permissions(self, platform):
+        self.handle_permission_dialog(platform, "physical_activity")
+        self.handle_permission_dialog(platform, "record_audio")
+        self.handle_permission_dialog(platform, "send_notifications")
+        self.click_on_back_button(platform)
 
 
