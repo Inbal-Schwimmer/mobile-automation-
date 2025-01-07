@@ -31,16 +31,12 @@ class TestLogin:
 
         login_page = LoginPage(setup_driver)
         login_page.login_permissions(platform)
-
         with allure.step(f"Entering email: {data['email']}"):
             login_page.enter_email(data['email'])
-
         with allure.step("Entering password"):
             login_page.enter_password(data['password'])
-
         with allure.step("Clicking login button"):
             login_page.click(login_page.LOGIN_BUTTON)
-
         with allure.step("Checking for invalid email error message"):
             error_exist = login_page.element_exist(login_page.INVALID_EMAIL_TEXT)
             assert error_exist, f"Expected error message not displayed for email: {data['email']}"

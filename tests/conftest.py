@@ -1,10 +1,8 @@
-import json
 import os
 import allure
 import pytest
 from pages.login_page import LoginPage
 from utils.driver_factory import DriverFactory
-from typing import Dict, List
 
 
 # Capture screenshot on test failure
@@ -15,11 +13,13 @@ def pytest_exception_interact(report):
             name="screenshot",
             attachment_type=allure.attachment_type.PNG,
         )
-        
+
+
 def pytest_addoption(parser):
     # adds a command-line option (--platform) to pytest.
     # example : pytest --platform=Android
     parser.addoption("--platform", action="store", default="Android", help="Choose the platform: Android or iOS")
+
 
 @pytest.fixture(scope="class")
 def platform(request):
@@ -27,13 +27,15 @@ def platform(request):
     # via the command line (or defaults to "Android")
     return request.config.getoption("--platform")
 
+
 @pytest.fixture(scope="class", autouse=True)
 def setup_driver(platform):
-# Create driver based on the platform (Android or iOS)
+    # Create driver based on the platform (Android or iOS)
     driver = DriverFactory.create_driver(platform)  # Initialize globally driver based on the platform
     pytest.driver = driver
     yield driver
     driver.quit()
+
 
 # Fixture for performing login, using the setup_driver fixture
 @pytest.fixture(scope="class")
@@ -52,10 +54,11 @@ def perform_login(setup_driver, platform):
         print(f"Initial login failed: {e}. Retrying...")
         login()  # Retry login if the first attempt fails
 
-    yield   # Pass the driver to the tests
+    yield  # Pass the driver to the tests
 
     # Optional cleanup after all tests
     # example, you could add logout logic here if needed
+
 
 @pytest.fixture(scope="class")
 def app_installation(request, setup_driver, platform):
@@ -76,7 +79,6 @@ def app_installation(request, setup_driver, platform):
         if perform_login:
             login_page.open_app_after_installation("esan@remepy.com", "123456", platform=platform)
 
-
     # Try to install and login
     try:
         install_and_login()
@@ -85,7 +87,6 @@ def app_installation(request, setup_driver, platform):
         install_and_login()  # Retry if the first attempt fails
 
     yield driver
-
 
 
 @pytest.fixture
@@ -103,5 +104,3 @@ def post_test_cleanup(setup_driver, platform):
     elif platform == "iOS":
         setup_driver.remove_app("com.remepy.devbct")
         setup_driver.install_app("/Users/inbalschwimmershafir/Documents/GitHub/Runner.app")
-
-
