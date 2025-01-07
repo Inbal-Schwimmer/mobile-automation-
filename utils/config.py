@@ -6,7 +6,7 @@ ANDROID_CONFIG = {
     "app": "/Users/inbalschwimmershafir/Documents/GitHub/frontend/apps/users_app/build/app/outputs/flutter-apk/app-base-debug.apk",
     "automationName": "Flutter",
     "appPackage": "com.remepy.devbct",
-    "appActivity": "com.remepy.remepy.MainActivity"
+    "appActivity": "com.remepy.remepy.MainActivity",
 }
 
 IOS_CONFIG = {

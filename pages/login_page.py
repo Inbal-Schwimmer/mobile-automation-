@@ -8,9 +8,9 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    LOGIN_BUTTON = (AppiumBy.ACCESSIBILITY_ID, "התחברות")  # example need to update
-    EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[@resource-id='email_tf']")
-    PASSWORD_TF = (AppiumBy.XPATH,"//android.widget.EditText[@resource-id='password_tf']")
+    LOGIN_BUTTON = (AppiumBy.ACCESSIBILITY_ID, "sign_in_button")  # example need to update
+    # EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[@resource-id='email_tf']")
+    # PASSWORD_TF = (AppiumBy.XPATH,"//android.widget.EditText[@resource-id='password_tf']")
     ANDROID_ALLOW_BTN = ("id", "com.android.permissioncontroller:id/permission_allow_button")
     ANDROID_ALLOW_RECORD_AUDIO_BTN = ("id", "com.android.permissioncontroller:id/permission_allow_foreground_only_button")
     IOS_ALLOW_BTN = (AppiumBy.ACCESSIBILITY_ID, "Allow")
@@ -18,10 +18,10 @@ class LoginPage(BasePage):
     NO_EMAIL_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "יש להזין כתובת מייל")
     INVALID_EMAIL_TEXT = (AppiumBy.ACCESSIBILITY_ID, "כתובת מייל לא תקינה")
     NO_PASSWORD_ERROR_TEXT = (AppiumBy.ACCESSIBILITY_ID, "הסיסמה חייבת להכיל לפחות 6 תווים")
-    NEW_EMAIL_TF = (AppiumBy.XPATH, "email_tf")
-    REG_EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint,'email_address')]")
-    REG_PASSWORD_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint, 'password')]")
-    EMAIL_TEXTFIELD_LOCATOR = (AppiumBy.ACCESSIBILITY_ID, "email_tf")
+    # REG_EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint,'email_address')]")
+    # REG_PASSWORD_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint, 'password')]")
+    REG_EMAIL_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint,'כתובת מייל')]")
+    REG_PASSWORD_TF = (AppiumBy.XPATH, "//android.widget.EditText[contains(@hint, 'סיסמה')]")
 
     def enter_password(self,password):
         self.input_text(self.REG_PASSWORD_TF,password)

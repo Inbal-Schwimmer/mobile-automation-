@@ -12,7 +12,7 @@ class ProfilePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    PROFILE_BTN = (AppiumBy.ACCESSIBILITY_ID, "profileIcon")
+    PROFILE_BTN = (AppiumBy.ACCESSIBILITY_ID, "profile")
 
 
 
